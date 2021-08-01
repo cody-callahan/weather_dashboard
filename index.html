@@ -4,12 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
 <body>
+    <header >
+        <h1>Weather</h1>
+      </header>
+
+      <div id="searchArea"><input id="inputCityHere" type="text"/><button id="submitSearch">Search</button>
     
+    <div id="recentItems"></div></div>
+
+    <main>
+        <div id="currentWeather" class = 'hide'>
+            <h3 id="currentCity"></h3>
+            <ul>
+                <li id="currentTemp"></li>
+                <li id="currentWind"></li>
+                <li id="currentHumid"></li>
+                <li id="currentUVI"></li>
+            </ul>
+        </div>
+        <div id="fiveDayForecast">
+
+        </div>
+    </main>
+
+      </main>
+
   <!-- add script at the bottom of the body -->
   <script src="./assets/js/homepage.js"></script>
+
 </body>
 
 </html>
