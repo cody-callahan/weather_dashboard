@@ -9,71 +9,73 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
-<body>
-    <header >
-        <h1 class="bg-primary">Weather Dashboard</h1>
-      </header>
+    <body class="container">
+        <header class = "row">
+            <h1 class="bg-primary col">Weather Dashboard</h1>
+        </header>
 
-      <div id="searchArea" class="col-12">
-          <h3>Search for a City:</h3>
-          <input id="inputCityHere" type="text"/><button id="submitSearch" class="btn-primary">Search</button>
-      </div>
-
-<div class="container">
-    <main class="row">
-        <div id="recentCities" class="col-md-4"></div>
-
-    
-        <div id="currentWeather" class = 'hide col-md-4'>
-            <h2 id="currentCity"></h3>
-            <ul>
-                <li id="currentTemp"></li>
-                <li id="currentWind"></li>
-                <li id="currentHumid"></li>
-                <li id="currentUVI"></li>
-            </ul>
+    <div class = "row">
+        <div id="searchArea" class="col-md-3">
+            <h3>Search for a City:</h3>
+            <input id="inputCityHere" type="text"/><button id="submitSearch" class="btn-primary">Search</button>
         </div>
 
-        <div id="fiveDayForecast" class = 'hide col-md-4'>
+        <div id="currentWeather" class = 'hide col-md-9'>
+            <h2 id="currentCity"></h3>
+            <div>
+                <div id="currentTemp"></div>
+                <div id="currentWind"></div>
+                <div id="currentHumid"></div>
+                <div id="currentUVI"></div>
+            </div>
+        </div>
+    </div>
 
-            <div >
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+
+
+    <main class="row">
+        <div id="recentCities" class="col-md-3"></div>
+
+        <div class = 'col-md-9'>
+          <div id="fiveDayForecast" class = "hide row">
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
                 <img></img>
             </div>
-            <div >
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
                 <img></img>
             </div>
-            <div >
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
                 <img></img>
             </div>
-            <div >
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
                 <img></img>
             </div>
-            <div >
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
                 <img></img>
-            </div>  
+            </div>
+          </div>  
         </div>
     </main>
-</div>
 
   <!-- add script at the bottom of the body -->
   <script src="./assets/js/homepage.js"></script>

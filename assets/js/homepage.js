@@ -153,6 +153,7 @@ var displayTodaysWeather = function(cityData) {
     var cityWind = cityData.current.wind_speed;
     var cityHumid = cityData.current.humidity;
     var cityUVI = cityData.current.uvi;
+
     console.log(cityTemp, cityWind, cityHumid);
 
     currentWeatherEl.classList.remove("hide");
@@ -164,7 +165,16 @@ var displayTodaysWeather = function(cityData) {
     currentHumidEl.textContent = `Humidity: ${cityHumid} %`;
     currentUVIEl.textContent = `UVI Index: ${cityUVI}`;
 
-    // currentCityEl.textContent = document.querySelector("#inputCityHere").value + ' (' + dateToday + ')';
+    currentUVIEl.className = "";
+    if (cityUVI <= 2) {
+        currentUVIEl.classList.add("bg-success");
+    } else if (cityUVI <= 5) {
+        currentUVIEl.classList.add("bg-warning");
+    } else {
+        currentUVIEl.classList.add("bg-danger");
+    };
+    console.log(cityUVI);
+    console.log(cityUVI <= 5);
 };
 
 
@@ -187,14 +197,17 @@ var displayFutureWeather = function(cityData) {
 
 
 var updateRecentSearches = function() {
-    
-    if(recentCitiesEl.childElementCount < 6) {
+    //recentCitiesEl.childElementCount
+    if(recentlySearchedCities.length < 6) {
         recentCitiesEl.innerHTML = ''
         for (let i = recentlySearchedCities.length - 1; i >= 0; i--) {
             var recentCityButton = document.createElement("button");
             recentCityButton.textContent = recentlySearchedCities[i];
             recentCityButton.addEventListener('click',getWeatherOld);
-            recentCityButton.classList.add("col-12");
+            recentCityButton.classList.add("btn");
+            recentCityButton.classList.add("btn-block");
+            recentCityButton.classList.add("btn-secondary");
+
             recentCitiesEl.appendChild(recentCityButton);
         }
     } else { 
@@ -203,6 +216,10 @@ var updateRecentSearches = function() {
         var recentCityButton = document.createElement("button");
         recentCityButton.textContent = recentlySearchedCities[i];
         recentCityButton.addEventListener('click',getWeatherOld);
+        recentCityButton.classList.add("btn");
+        recentCityButton.classList.add("btn-block");
+        recentCityButton.classList.add("btn-secondary");
+
         recentCitiesEl.appendChild(recentCityButton);
     } 
 }
