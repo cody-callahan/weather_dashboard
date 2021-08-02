@@ -9,6 +9,7 @@ var currentTempEl = document.querySelector('#currentTemp');
 var currentWindEl = document.querySelector('#currentWind');
 var currentHumidEl = document.querySelector('#currentHumid');
 var currentUVIEl = document.querySelector('#currentUVI');
+var currentIconEl = document.querySelector('#currentIcon');
 
 var fiveDayForecastEl = document.querySelector('#fiveDayForecast');
 
@@ -40,6 +41,8 @@ var getWeather = function(city) {
     var userSearchParameter = city
 
     currentCityEl.textContent = userSearchParameter.toUpperCase() + ' (' + dateToday + ')';
+    
+
 
     console.log(userSearchParameter);
 
@@ -49,94 +52,20 @@ var getWeather = function(city) {
           var lonCoord = data.coord.lon;
           var latCoord = data.coord.lat;
 
+          icon = data.weather[0].icon;
 
           // load into memory
-          console.log({recentlySearchedCities,userSearchParameter})
+        //   console.log({recentlySearchedCities,userSearchParameter})
             recentlySearchedCities.push(userSearchParameter);
         
             localStorage.setItem('cities', JSON.stringify(recentlySearchedCities));
-            console.log(recentlySearchedCities);
+            // console.log(recentlySearchedCities);
 
             updateRecentSearches();
 
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latCoord}&lon=${lonCoord}&exclude=minutely,hourly&appid=15e070e69cfccce084f2a07250f5282c`).then(function(response){
             response.json().then(function(data) {
-                console.log(new Date(data.daily[0].dt * 1000));
-                displayTodaysWeather(data);
-                console.log(data);
-                displayFutureWeather(data);
-        });
-
-
-        });
-      });
-})};
-
-
-// var getWeather = function(event) {
-//     console.log(event.target.textContent);
-//     var userSearchParameter = document.querySelector("#inputCityHere").value;
-//     console.log(userSearchParameter);
-
-//     ;
-
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userSearchParameter}&APPID=15e070e69cfccce084f2a07250f5282c`).then(function(response) {
-//         response.json().then(function(data) {
-//           console.log(data);
-//           var lonCoord = data.coord.lon;
-//           var latCoord = data.coord.lat;
-//             console.log(localStorage['cities'])
-
-
-//           // load into memory
-//           console.log({recentlySearchedCities,userSearchParameter})
-//             recentlySearchedCities.push(userSearchParameter);
-        
-//             localStorage.setItem('cities', JSON.stringify(recentlySearchedCities));
-//             console.log(recentlySearchedCities);
-
-//             updateRecentSearches();
-
-//         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latCoord}&lon=${lonCoord}&exclude=minutely,hourly&appid=15e070e69cfccce084f2a07250f5282c`).then(function(response){
-//             response.json().then(function(data) {
-//                 console.log(new Date(data.daily[0].dt * 1000));
-//                 displayTodaysWeather(data);
-//                 console.log(data);
-//                 displayFutureWeather(data);
-//         });
-
-
-//         });
-//       });
-// })};
-
-
-var getOldWeather = function(event) {
-    console.log(event.target.textContent);
-    var userSearchParameter = event.target.textContent;
-    console.log(userSearchParameter);
-
-
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userSearchParameter}&APPID=15e070e69cfccce084f2a07250f5282c`).then(function(response) {
-        response.json().then(function(data) {
-          console.log(data);
-          var lonCoord = data.coord.lon;
-          var latCoord = data.coord.lat;
-            console.log(localStorage['cities'])
-
-
-          // load into memory
-        //   console.log({recentlySearchedCities,userSearchParameter})
-        //     recentlySearchedCities.push(userSearchParameter);
-        
-        //     localStorage.setItem('cities', JSON.stringify(recentlySearchedCities));
-        //     console.log(recentlySearchedCities);
-
-            // updateRecentSearches();
-
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latCoord}&lon=${lonCoord}&exclude=minutely,hourly&appid=15e070e69cfccce084f2a07250f5282c`).then(function(response){
-            response.json().then(function(data) {
-                console.log(new Date(data.daily[0].dt * 1000));
+                // console.log(new Date(data.daily[0].dt * 1000));
                 displayTodaysWeather(data);
                 console.log(data);
                 displayFutureWeather(data);
@@ -153,12 +82,13 @@ var displayTodaysWeather = function(cityData) {
     var cityWind = cityData.current.wind_speed;
     var cityHumid = cityData.current.humidity;
     var cityUVI = cityData.current.uvi;
-
-    console.log(cityTemp, cityWind, cityHumid);
+    
+    // console.log(cityTemp, cityWind, cityHumid);
 
     currentWeatherEl.classList.remove("hide");
 
-    
+    console.log(icon);
+    currentIconEl.src = `http://openweathermap.org/img/wn/${icon}.png`;
 
     currentTempEl.textContent = `Temp: ${cityTemp}`;
     currentWindEl.textContent = `Wind: ${cityWind} MPH`;
@@ -173,8 +103,8 @@ var displayTodaysWeather = function(cityData) {
     } else {
         currentUVIEl.classList.add("bg-danger");
     };
-    console.log(cityUVI);
-    console.log(cityUVI <= 5);
+    // console.log(cityUVI);
+    // console.log(cityUVI <= 5);
 };
 
 
