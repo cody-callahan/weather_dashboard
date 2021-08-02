@@ -11,16 +11,20 @@
 </head>
 <body>
     <header >
-        <h1 class = "bg-primary">Weather</h1>
+        <h1 class="bg-primary">Weather Dashboard</h1>
       </header>
 
-      <div id="searchArea"><input id="inputCityHere" type="text"/><button id="submitSearch">Search</button>
-    
-    <div id="recentCities">
-    </div>
+      <div id="searchArea" class="col-12">
+          <h3>Search for a City:</h3>
+          <input id="inputCityHere" type="text"/><button id="submitSearch" class="btn-primary">Search</button>
+      </div>
 
-    <main>
-        <div id="currentWeather" class = 'hide'>
+<div class="container">
+    <main class="row">
+        <div id="recentCities" class="col-md-4"></div>
+
+    
+        <div id="currentWeather" class = 'hide col-md-4'>
             <h2 id="currentCity"></h3>
             <ul>
                 <li id="currentTemp"></li>
@@ -30,42 +34,46 @@
             </ul>
         </div>
 
-        <div id="fiveDayForecast" class = 'hide'>
+        <div id="fiveDayForecast" class = 'hide col-md-4'>
 
-            <div class = "card">
+            <div >
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
+                <img></img>
             </div>
-            <div class = "card">
+            <div >
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
+                <img></img>
             </div>
-            <div class = "card">
+            <div >
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
+                <img></img>
             </div>
-            <div class = "card">
+            <div >
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
+                <img></img>
             </div>
-            <div class = "card">
+            <div >
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
+                <img></img>
             </div>  
         </div>
     </main>
-
-      </main>
+</div>
 
   <!-- add script at the bottom of the body -->
   <script src="./assets/js/homepage.js"></script>

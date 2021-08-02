@@ -178,10 +178,13 @@ var displayFutureWeather = function(cityData) {
         fiveDayForecastEl.children[i].children[1].textContent = `Temp: ${cityData.daily[i].temp.day}`;
         fiveDayForecastEl.children[i].children[2].textContent = `Wind: ${cityData.daily[i].wind_speed}`;
         fiveDayForecastEl.children[i].children[3].textContent = `Humidity: ${cityData.daily[i].humidity}`;
+
+        fiveDayForecastEl.children[i].children[4].src = `http://openweathermap.org/img/wn/${cityData.daily[i].weather[0].icon}.png`;
+
+
     }
 };
 
-14 - 6
 
 var updateRecentSearches = function() {
     
@@ -191,6 +194,7 @@ var updateRecentSearches = function() {
             var recentCityButton = document.createElement("button");
             recentCityButton.textContent = recentlySearchedCities[i];
             recentCityButton.addEventListener('click',getWeatherOld);
+            recentCityButton.classList.add("col-12");
             recentCitiesEl.appendChild(recentCityButton);
         }
     } else { 
