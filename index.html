@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+    <body class="container">
+        <header class = "row">
+            <h1 class="bg-primary col">Weather Dashboard</h1>
+        </header>
+
+    <div class = "row">
+        <div id="searchArea" class="col-md-3">
+            <h3>Search for a City:</h3>
+            <input id="inputCityHere" type="text"/><button id="submitSearch" class="btn-primary">Search</button>
+        </div>
+
+        <div id="currentWeather" class = 'hide col-md-9'>
+            <h2 id="currentCity"></h3>
+                <img id="currentIcon"></img>
+                <div id="currentTemp"></div>
+                <div id="currentWind"></div>
+                <div id="currentHumid"></div>
+                <div id="currentUVI"></div>
+        </div>
+    </div>
+
+
+
+    <main class="row">
+        <div id="recentCities" class="col-md-3"></div>
+
+        <div class = 'col-md-9'>
+          <div id="fiveDayForecast" class = "hide row">
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
+                <img></img>
+            </div>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
+                <img></img>
+            </div>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
+                <img></img>
+            </div>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
+                <img></img>
+            </div>
+            <div class = "col-md-2 card bg-primary">
+                <h4 class="card-title"></h4>
+                <div></div>
+                <div></div>
+                <div></div>
+                <img></img>
+            </div>
+          </div>  
+        </div>
+    </main>
+
+  <!-- add script at the bottom of the body -->
+  <script src="./assets/js/homepage.js"></script>
+
+</body>
+
+</html>
+
