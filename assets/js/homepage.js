@@ -181,20 +181,28 @@ var displayFutureWeather = function(cityData) {
     }
 };
 
+14 - 6
 
 var updateRecentSearches = function() {
+    
     if(recentCitiesEl.childElementCount < 6) {
         recentCitiesEl.innerHTML = ''
-        for (let i = 0; i < recentlySearchedCities.length; i++) {
+        for (let i = recentlySearchedCities.length - 1; i >= 0; i--) {
             var recentCityButton = document.createElement("button");
             recentCityButton.textContent = recentlySearchedCities[i];
             recentCityButton.addEventListener('click',getWeatherOld);
             recentCitiesEl.appendChild(recentCityButton);
         }
-        
-    }
-    // OldCitiesEl.textContent = 
+    } else { 
+        recentCitiesEl.innerHTML = '';
+        for (let i = recentlySearchedCities.length - 1; i >= recentlySearchedCities.length - 6; i--) {
+        var recentCityButton = document.createElement("button");
+        recentCityButton.textContent = recentlySearchedCities[i];
+        recentCityButton.addEventListener('click',getWeatherOld);
+        recentCitiesEl.appendChild(recentCityButton);
+    } 
 }
+};
 
 // event listener to store names of cities  
 cityInputEl.addEventListener('click', getWeatherNew);
