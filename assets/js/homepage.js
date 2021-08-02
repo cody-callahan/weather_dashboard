@@ -1,7 +1,8 @@
 // var cityInputEl = document.querySelector("#city");
 var cityInputEl = document.querySelector('#submitSearch');
-var currentWeatherEl = document.querySelector('#currentWeather');
 var recentCitiesEl = document.querySelector('#recentCities');
+
+var currentWeatherEl = document.querySelector('#currentWeather');
 
 var currentCityEl = document.querySelector("#currentCity");
 var currentTempEl = document.querySelector('#currentTemp');
@@ -12,9 +13,9 @@ var currentUVIEl = document.querySelector('#currentUVI');
 var fiveDayForecastEl = document.querySelector('#fiveDayForecast');
 
 // document.querySelector('#fiveDayForecast').children.length
+// var searchedCity = document.querySelector("#inputCityHere").value;
 
-
-var recentlySearchedCities = localStorage.getItem("searchedCities") || []
+var recentlySearchedCities = JSON.parse(localStorage.getItem("cities")) || []
 //this will need a corresponding localStorage.setItem("searchedCities") at the end of your code, which will be an array of userInput values
 //in the onclick event, you're going to push to recentlySearchedCities array  and then save the new array to localstorage
 
@@ -23,36 +24,44 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
-dateToday = `${mm}/${dd}/${yyyy}`;
+dateToday = mm + '/' + dd + '/' + yyyy;
 
 
-var getWeather = function() {
-    var userSearchParameter = document.querySelector("#inputCityHere").value;
+var getWeatherNew = function() {
+    getWeather(document.querySelector("#inputCityHere").value)
+}
+
+var getWeatherOld = function(event) {
+    getWeather(event.target.textContent)
+}
+
+
+var getWeather = function(city) {
+    var userSearchParameter = city
+
+    currentCityEl.textContent = userSearchParameter + ' (' + dateToday + ')';
+
+    console.log(userSearchParameter);
+
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userSearchParameter}&APPID=15e070e69cfccce084f2a07250f5282c`).then(function(response) {
         response.json().then(function(data) {
           console.log(data);
           var lonCoord = data.coord.lon;
           var latCoord = data.coord.lat;
 
+
           // load into memory
-        if (localStorage['cities']) {
-            var cities = [localStorage['cities']];
-            // add the cities to the array
-            cities.push(document.querySelector("#inputCityHere").value);
-            // save to local storage
-            localStorage["cities"] = cities;
-            updateRecentSearches();
-        } else {
-            localStorage.setItem('cities', document.querySelector("#inputCityHere").value);
-        };
-
+          console.log({recentlySearchedCities,userSearchParameter})
+            recentlySearchedCities.push(userSearchParameter);
         
+            localStorage.setItem('cities', JSON.stringify(recentlySearchedCities));
+            console.log(recentlySearchedCities);
 
-
-        //   displayTodaysWeather(data);
+            updateRecentSearches();
 
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latCoord}&lon=${lonCoord}&exclude=minutely,hourly&appid=15e070e69cfccce084f2a07250f5282c`).then(function(response){
             response.json().then(function(data) {
+                console.log(new Date(data.daily[0].dt * 1000));
                 displayTodaysWeather(data);
                 console.log(data);
                 displayFutureWeather(data);
@@ -62,6 +71,82 @@ var getWeather = function() {
         });
       });
 })};
+
+
+// var getWeather = function(event) {
+//     console.log(event.target.textContent);
+//     var userSearchParameter = document.querySelector("#inputCityHere").value;
+//     console.log(userSearchParameter);
+
+//     ;
+
+//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userSearchParameter}&APPID=15e070e69cfccce084f2a07250f5282c`).then(function(response) {
+//         response.json().then(function(data) {
+//           console.log(data);
+//           var lonCoord = data.coord.lon;
+//           var latCoord = data.coord.lat;
+//             console.log(localStorage['cities'])
+
+
+//           // load into memory
+//           console.log({recentlySearchedCities,userSearchParameter})
+//             recentlySearchedCities.push(userSearchParameter);
+        
+//             localStorage.setItem('cities', JSON.stringify(recentlySearchedCities));
+//             console.log(recentlySearchedCities);
+
+//             updateRecentSearches();
+
+//         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latCoord}&lon=${lonCoord}&exclude=minutely,hourly&appid=15e070e69cfccce084f2a07250f5282c`).then(function(response){
+//             response.json().then(function(data) {
+//                 console.log(new Date(data.daily[0].dt * 1000));
+//                 displayTodaysWeather(data);
+//                 console.log(data);
+//                 displayFutureWeather(data);
+//         });
+
+
+//         });
+//       });
+// })};
+
+
+var getOldWeather = function(event) {
+    console.log(event.target.textContent);
+    var userSearchParameter = event.target.textContent;
+    console.log(userSearchParameter);
+
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userSearchParameter}&APPID=15e070e69cfccce084f2a07250f5282c`).then(function(response) {
+        response.json().then(function(data) {
+          console.log(data);
+          var lonCoord = data.coord.lon;
+          var latCoord = data.coord.lat;
+            console.log(localStorage['cities'])
+
+
+          // load into memory
+        //   console.log({recentlySearchedCities,userSearchParameter})
+        //     recentlySearchedCities.push(userSearchParameter);
+        
+        //     localStorage.setItem('cities', JSON.stringify(recentlySearchedCities));
+        //     console.log(recentlySearchedCities);
+
+            // updateRecentSearches();
+
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latCoord}&lon=${lonCoord}&exclude=minutely,hourly&appid=15e070e69cfccce084f2a07250f5282c`).then(function(response){
+            response.json().then(function(data) {
+                console.log(new Date(data.daily[0].dt * 1000));
+                displayTodaysWeather(data);
+                console.log(data);
+                displayFutureWeather(data);
+        });
+
+
+        });
+      });
+})};
+
 
 var displayTodaysWeather = function(cityData) {
     var cityTemp = cityData.current.temp;
@@ -79,7 +164,7 @@ var displayTodaysWeather = function(cityData) {
     currentHumidEl.textContent = `Humidity: ${cityHumid} %`;
     currentUVIEl.textContent = `UVI Index: ${cityUVI}`;
 
-    currentCityEl.textContent = document.querySelector("#inputCityHere").value + ' (' + dateToday + ')';
+    // currentCityEl.textContent = document.querySelector("#inputCityHere").value + ' (' + dateToday + ')';
 };
 
 
@@ -98,10 +183,19 @@ var displayFutureWeather = function(cityData) {
 
 
 var updateRecentSearches = function() {
-    recentCitiesEl.textContent = localStorage['cities']
+    if(recentCitiesEl.childElementCount < 6) {
+        recentCitiesEl.innerHTML = ''
+        for (let i = 0; i < recentlySearchedCities.length; i++) {
+            var recentCityButton = document.createElement("button");
+            recentCityButton.textContent = recentlySearchedCities[i];
+            recentCityButton.addEventListener('click',getWeatherOld);
+            recentCitiesEl.appendChild(recentCityButton);
+        }
+        
+    }
+    // OldCitiesEl.textContent = 
 }
 
 // event listener to store names of cities  
-cityInputEl.addEventListener('click', getWeather);
+cityInputEl.addEventListener('click', getWeatherNew);
   
-
