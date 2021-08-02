@@ -39,7 +39,7 @@ var getWeatherOld = function(event) {
 var getWeather = function(city) {
     var userSearchParameter = city
 
-    currentCityEl.textContent = userSearchParameter + ' (' + dateToday + ')';
+    currentCityEl.textContent = userSearchParameter.toUpperCase() + ' (' + dateToday + ')';
 
     console.log(userSearchParameter);
 
